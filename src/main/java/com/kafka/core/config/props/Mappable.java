@@ -1,4 +1,4 @@
-package com.kafka.demo.config.props;
+package com.kafka.core.config.props;
 
 import java.util.Map;
 

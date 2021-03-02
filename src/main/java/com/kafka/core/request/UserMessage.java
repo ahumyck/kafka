@@ -1,4 +1,4 @@
-package com.kafka.demo.request;
+package com.kafka.core.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

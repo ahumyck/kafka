@@ -1,8 +1,8 @@
-package com.kafka.demo.controller;
+package com.kafka.core.controller;
 
 
-import com.kafka.demo.entity.User;
-import com.kafka.demo.request.UserMessage;
+import com.kafka.core.entity.User;
+import com.kafka.core.request.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;

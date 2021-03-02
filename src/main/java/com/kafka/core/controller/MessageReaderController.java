@@ -1,6 +1,6 @@
-package com.kafka.demo.controller;
+package com.kafka.core.controller;
 
-import com.kafka.demo.entity.User;
+import com.kafka.core.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.GetMapping;

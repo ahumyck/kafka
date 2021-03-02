@@ -1,7 +1,7 @@
-package com.kafka.demo.config;
+package com.kafka.core.config;
 
-import com.kafka.demo.config.props.ProducerProperties;
-import com.kafka.demo.entity.User;
+import com.kafka.core.config.props.ProducerProperties;
+import com.kafka.core.entity.User;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

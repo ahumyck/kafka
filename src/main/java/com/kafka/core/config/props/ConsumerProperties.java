@@ -1,4 +1,4 @@
-package com.kafka.demo.config.props;
+package com.kafka.core.config.props;
 
 import lombok.*;
 import org.apache.kafka.clients.consumer.ConsumerConfig;

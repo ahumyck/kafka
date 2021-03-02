@@ -1,6 +1,6 @@
-package com.kafka.demo.entity;
+package com.kafka.core.entity;
 
-import com.kafka.demo.request.UserMessage;
+import com.kafka.core.request.UserMessage;
 import lombok.*;
 
 import java.io.Serializable;

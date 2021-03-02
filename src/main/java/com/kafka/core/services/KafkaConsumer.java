@@ -1,4 +1,4 @@
-package com.kafka.demo.services;
+package com.kafka.core.services;
 
 import org.springframework.stereotype.Service;
 
