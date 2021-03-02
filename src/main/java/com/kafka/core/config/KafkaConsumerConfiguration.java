@@ -38,25 +38,4 @@ public class KafkaConsumerConfiguration {
         listener.setConsumerFactory(userConsumerFactory());
         return listener;
     }
-
-    @Bean
-    public ConsumerFactory<String, String> defaultConsumerFactory() {
-        Map<String, Object> properties = ConsumerProperties
-                .builder()
-                .serverConfig("127.0.0.1:9092")
-                .groupIdConfig("groupId")
-                .keyDeserializer(StringDeserializer.class)
-                .valueDeserializer(JsonDeserializer.class)
-                .build()
-                .getAsMap();
-        return new DefaultKafkaConsumerFactory<>(properties);
-    }
-
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> defaultListener() {
-        ConcurrentKafkaListenerContainerFactory<String, String> listener
-                = new ConcurrentKafkaListenerContainerFactory<>();
-        listener.setConsumerFactory(defaultConsumerFactory());
-        return listener;
-    }
 }
