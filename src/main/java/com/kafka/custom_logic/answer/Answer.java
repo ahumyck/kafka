@@ -1,4 +1,4 @@
-package com.kafka.custom_logic.task;
+package com.kafka.custom_logic.answer;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -3,7 +3,7 @@ package com.kafka;
 import com.kafka.custom_logic.IndexedObject;
 import com.kafka.custom_logic.solver.Solver;
 import com.kafka.custom_logic.solver.impl.DefaultSolver;
-import com.kafka.custom_logic.task.Answer;
+import com.kafka.custom_logic.answer.Answer;
 import com.kafka.custom_logic.task.Task;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
