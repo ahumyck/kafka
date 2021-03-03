@@ -13,9 +13,9 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import java.util.Map;
 
-@Configuration
+//@Configuration
 public class KafkaAnswerConsumer {
-	@Bean
+//	@Bean
 	public ConsumerFactory<String, IndexedObject<Answer>> answerConsumerFactory() {
 
 		Map<String, Object> properties = ConsumerProperties
@@ -31,7 +31,7 @@ public class KafkaAnswerConsumer {
 		                                         new JsonDeserializer<>(IndexedObject.class));
 	}
 
-	@Bean
+//	@Bean
 	public ConcurrentKafkaListenerContainerFactory<String, IndexedObject<Answer>> answerListener() {
 		ConcurrentKafkaListenerContainerFactory<String, IndexedObject<Answer>> listener
 				= new ConcurrentKafkaListenerContainerFactory<>();

@@ -5,6 +5,7 @@ import com.kafka.custom_logic.IndexedObject;
 import com.kafka.custom_logic.task.Task;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
@@ -12,9 +13,10 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import java.util.Map;
 
+//@Configuration
 public class KafkaTaskConsumer {
 
-	@Bean
+//	@Bean
 	public ConsumerFactory<String, IndexedObject<Task>> taskConsumerFactory() {
 
 		Map<String, Object> properties = ConsumerProperties
@@ -30,7 +32,7 @@ public class KafkaTaskConsumer {
 		                                         new JsonDeserializer<>(IndexedObject.class));
 	}
 
-	@Bean
+//	@Bean
 	public ConcurrentKafkaListenerContainerFactory<String, IndexedObject<Task>> taskListener() {
 		ConcurrentKafkaListenerContainerFactory<String, IndexedObject<Task>> listener
 				= new ConcurrentKafkaListenerContainerFactory<>();

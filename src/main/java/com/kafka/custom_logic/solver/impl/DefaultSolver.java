@@ -10,7 +10,6 @@ import lombok.SneakyThrows;
 public class DefaultSolver extends AbstractSolver {
 
 	@Override
-	@SneakyThrows
 	public IndexedObject<Answer> solve(IndexedObject<Task> indexedTask) {
 		return super.solve(indexedTask);
 	}

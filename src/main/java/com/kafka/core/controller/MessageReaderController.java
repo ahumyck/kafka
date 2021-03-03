@@ -14,7 +14,8 @@ public class MessageReaderController {
 
     private final AtomicReference<User> storedUser = new AtomicReference<>();
 
-    @KafkaListener(topics = "KAFKA_TOPIC", groupId = "groupId")
+    @KafkaListener(topics = "KAFKA_TOPIC", groupId = "groupId",
+            containerFactory = "userListener")
     public void storeUser(User user) {
         log.info("=> User: " + user);
         storedUser.set(user);

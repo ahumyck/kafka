@@ -2,6 +2,7 @@ package com.kafka.core.config;
 
 import com.kafka.core.config.props.ConsumerProperties;
 import com.kafka.core.entity.User;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import java.util.Map;
 
 @Configuration
+@Slf4j
 public class KafkaConsumerConfiguration {
 
     @Bean
@@ -26,7 +28,7 @@ public class KafkaConsumerConfiguration {
                 .valueDeserializer(JsonDeserializer.class)
                 .build()
                 .getAsMap();
-
+        log.info("user consumer factory => " + properties);
         return new DefaultKafkaConsumerFactory<>(properties, new StringDeserializer(),
                 new JsonDeserializer<>(User.class));
     }

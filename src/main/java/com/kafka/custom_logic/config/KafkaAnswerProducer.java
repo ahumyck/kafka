@@ -14,10 +14,10 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.Map;
 
-@Configuration
+//@Configuration
 public class KafkaAnswerProducer {
 
-	@Bean
+//	@Bean
 	public ProducerFactory<String, IndexedObject<Answer>> answerProducerFactory() {
 
 		Map<String, Object> properties = ProducerProperties
@@ -31,7 +31,7 @@ public class KafkaAnswerProducer {
 		return new DefaultKafkaProducerFactory<>(properties);
 	}
 
-	@Bean
+//	@Bean
 	public KafkaTemplate<String, IndexedObject<Answer>> kafkaAnswerTemplate() {
 		return new KafkaTemplate<>(answerProducerFactory());
 	}

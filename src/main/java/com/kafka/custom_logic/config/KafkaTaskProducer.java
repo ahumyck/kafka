@@ -13,9 +13,9 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.Map;
 
-@Configuration
+//@Configuration
 public class KafkaTaskProducer {
-	@Bean
+//	@Bean
 	public ProducerFactory<String, IndexedObject<Task>> taskProducerFactory() {
 
 		Map<String, Object> properties = ProducerProperties
@@ -29,7 +29,7 @@ public class KafkaTaskProducer {
 		return new DefaultKafkaProducerFactory<>(properties);
 	}
 
-	@Bean
+//	@Bean
 	public KafkaTemplate<String, IndexedObject<Task>> kafkaTaskTemplate() {
 		return new KafkaTemplate<>(taskProducerFactory());
 	}

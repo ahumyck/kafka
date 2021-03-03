@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Service
+//@Service
 public class KafkaTaskProducer {
 
-	@Autowired
-	KafkaTemplate<String, IndexedObject<Task>> kafkaTemplate;
+//	@Autowired
+	private KafkaTemplate<String, IndexedObject<Task>> kafkaTemplate;
 
 	private final AtomicInteger index = new AtomicInteger(0);
 
