@@ -28,7 +28,6 @@ public class KafkaConsumerConfiguration {
                 .valueDeserializer(JsonDeserializer.class)
                 .build()
                 .getAsMap();
-        log.info("user consumer factory => " + properties);
         return new DefaultKafkaConsumerFactory<>(properties, new StringDeserializer(),
                 new JsonDeserializer<>(User.class));
     }

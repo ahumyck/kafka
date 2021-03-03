@@ -1,8 +1,7 @@
 package com.kafka.custom_logic.config;
 
 import com.kafka.core.config.props.ConsumerProperties;
-import com.kafka.custom_logic.IndexedObject;
-import com.kafka.custom_logic.task.Task;
+import com.kafka.custom_logic.task.IndexedTask;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,31 +12,32 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import java.util.Map;
 
-//@Configuration
+@Configuration
 public class KafkaTaskConsumer {
 
-//	@Bean
-	public ConsumerFactory<String, IndexedObject<Task>> taskConsumerFactory() {
+    public static final String GROUP_ID = "taskConsumerId";
 
-		Map<String, Object> properties = ConsumerProperties
-				.builder()
-				.serverConfig("127.0.0.1:9092") //TODO: change
-				.groupIdConfig("groupId") //TODO: change
-				.keyDeserializer(StringDeserializer.class)
-				.valueDeserializer(JsonDeserializer.class)
-				.build()
-				.getAsMap();
+    @Bean
+    public ConsumerFactory<String, IndexedTask> taskConsumerFactory() {
 
-		return new DefaultKafkaConsumerFactory<>(properties, new StringDeserializer(),
-		                                         new JsonDeserializer<>(IndexedObject.class));
-	}
+        Map<String, Object> properties = ConsumerProperties
+                .builder()
+                .serverConfig("127.0.0.1:9092") //TODO: change
+                .groupIdConfig(GROUP_ID) //TODO: change
+                .keyDeserializer(StringDeserializer.class)
+                .valueDeserializer(JsonDeserializer.class)
+                .build()
+                .getAsMap();
+        return new DefaultKafkaConsumerFactory<>(properties, new StringDeserializer(),
+                new JsonDeserializer<>(IndexedTask.class));
+    }
 
-//	@Bean
-	public ConcurrentKafkaListenerContainerFactory<String, IndexedObject<Task>> taskListener() {
-		ConcurrentKafkaListenerContainerFactory<String, IndexedObject<Task>> listener
-				= new ConcurrentKafkaListenerContainerFactory<>();
-		listener.setConsumerFactory(taskConsumerFactory());
-		return listener;
-	}
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, IndexedTask> taskListener() {
+        ConcurrentKafkaListenerContainerFactory<String, IndexedTask> listener
+                = new ConcurrentKafkaListenerContainerFactory<>();
+        listener.setConsumerFactory(taskConsumerFactory());
+        return listener;
+    }
 
 }

@@ -1,9 +1,7 @@
 package com.kafka.custom_logic.config;
 
 import com.kafka.core.config.props.ProducerProperties;
-import com.kafka.custom_logic.IndexedObject;
-import com.kafka.custom_logic.answer.Answer;
-import com.kafka.custom_logic.task.Task;
+import com.kafka.custom_logic.answer.IndexedAnswer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,25 +12,28 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.Map;
 
-//@Configuration
+@Configuration
 public class KafkaAnswerProducer {
 
-//	@Bean
-	public ProducerFactory<String, IndexedObject<Answer>> answerProducerFactory() {
+    public static final String GROUP_ID = "answerProducerId";
+    public static final String TOPIC = "ANSWERS";
 
-		Map<String, Object> properties = ProducerProperties
-				.builder()
-				.serverConfig("127.0.0.1:9092") //TODO: change
-				.clientIdConfig("answerId")
-				.keySerializer(StringSerializer.class)
-				.valueSerializer(JsonSerializer.class)
-				.build()
-				.getAsMap();
-		return new DefaultKafkaProducerFactory<>(properties);
-	}
+    @Bean
+    public ProducerFactory<String, IndexedAnswer> answerProducerFactory() {
 
-//	@Bean
-	public KafkaTemplate<String, IndexedObject<Answer>> kafkaAnswerTemplate() {
-		return new KafkaTemplate<>(answerProducerFactory());
-	}
+        Map<String, Object> properties = ProducerProperties
+                .builder()
+                .serverConfig("127.0.0.1:9092") //TODO: change
+                .clientIdConfig(GROUP_ID)
+                .keySerializer(StringSerializer.class)
+                .valueSerializer(JsonSerializer.class)
+                .build()
+                .getAsMap();
+        return new DefaultKafkaProducerFactory<>(properties);
+    }
+
+    @Bean
+    public KafkaTemplate<String, IndexedAnswer> kafkaAnswerTemplate() {
+        return new KafkaTemplate<>(answerProducerFactory());
+    }
 }

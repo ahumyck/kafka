@@ -1,8 +1,7 @@
 package com.kafka.custom_logic.config;
 
 import com.kafka.core.config.props.ConsumerProperties;
-import com.kafka.custom_logic.IndexedObject;
-import com.kafka.custom_logic.answer.Answer;
+import com.kafka.custom_logic.answer.IndexedAnswer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,29 +12,32 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import java.util.Map;
 
-//@Configuration
+@Configuration
 public class KafkaAnswerConsumer {
-//	@Bean
-	public ConsumerFactory<String, IndexedObject<Answer>> answerConsumerFactory() {
 
-		Map<String, Object> properties = ConsumerProperties
-				.builder()
-				.serverConfig("127.0.0.1:9092") //TODO: change
-				.groupIdConfig("groupId") //TODO: change
-				.keyDeserializer(StringDeserializer.class)
-				.valueDeserializer(JsonDeserializer.class)
-				.build()
-				.getAsMap();
+    public static final String GROUP_ID = "answerConsumerId";
 
-		return new DefaultKafkaConsumerFactory<>(properties, new StringDeserializer(),
-		                                         new JsonDeserializer<>(IndexedObject.class));
-	}
+    @Bean
+    public ConsumerFactory<String, IndexedAnswer> answerConsumerFactory() {
 
-//	@Bean
-	public ConcurrentKafkaListenerContainerFactory<String, IndexedObject<Answer>> answerListener() {
-		ConcurrentKafkaListenerContainerFactory<String, IndexedObject<Answer>> listener
-				= new ConcurrentKafkaListenerContainerFactory<>();
-		listener.setConsumerFactory(answerConsumerFactory());
-		return listener;
-	}
+        Map<String, Object> properties = ConsumerProperties
+                .builder()
+                .serverConfig("127.0.0.1:9092") //TODO: change
+                .groupIdConfig(GROUP_ID) //TODO: change
+                .keyDeserializer(StringDeserializer.class)
+                .valueDeserializer(JsonDeserializer.class)
+                .build()
+                .getAsMap();
+
+        return new DefaultKafkaConsumerFactory<>(properties, new StringDeserializer(),
+                new JsonDeserializer<>(IndexedAnswer.class));
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, IndexedAnswer> answerListener() {
+        ConcurrentKafkaListenerContainerFactory<String, IndexedAnswer> listener
+                = new ConcurrentKafkaListenerContainerFactory<>();
+        listener.setConsumerFactory(answerConsumerFactory());
+        return listener;
+    }
 }

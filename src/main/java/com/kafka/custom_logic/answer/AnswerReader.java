@@ -1,13 +1,16 @@
 package com.kafka.custom_logic.answer;
 
-import com.kafka.custom_logic.IndexedObject;
+import com.kafka.custom_logic.config.KafkaAnswerConsumer;
+import com.kafka.custom_logic.config.KafkaAnswerProducer;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class AnswerReader {
 
-	//	    @KafkaListener(topics = "KAFKA_TOPIC", groupId = "groupId") //TODO: change topic and group id
-	public IndexedObject<Answer> consume(IndexedObject<Answer> indexedAnswer) {
-		return indexedAnswer;
-	}
+//    @KafkaListener(topics = KafkaAnswerProducer.TOPIC, groupId = KafkaAnswerConsumer.GROUP_ID)
+    public IndexedAnswer consume(IndexedAnswer indexedAnswer) {
+        System.out.println(indexedAnswer);
+        return indexedAnswer;
+    }
 }

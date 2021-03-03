@@ -1,9 +1,8 @@
 package com.kafka.custom_logic.solver;
 
-import com.kafka.custom_logic.IndexedObject;
-import com.kafka.custom_logic.answer.Answer;
-import com.kafka.custom_logic.task.Task;
+import com.kafka.custom_logic.answer.IndexedAnswer;
+import com.kafka.custom_logic.task.IndexedTask;
 
 public interface Solver {
-	IndexedObject<Answer> solve(IndexedObject<Task> indexedTask);
+    IndexedAnswer solve(IndexedTask indexedTask);
 }
