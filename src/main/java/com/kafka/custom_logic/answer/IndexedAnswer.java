@@ -1,8 +1,18 @@
 package com.kafka.custom_logic.answer;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class IndexedAnswer {
     private int index;
     private List<Double> answers = new ArrayList<>();

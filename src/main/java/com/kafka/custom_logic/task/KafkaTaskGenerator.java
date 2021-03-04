@@ -7,16 +7,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @RestController
-public class KafkaTaskGenerator implements TaskGenerator {
+public class KafkaTaskGenerator extends AbstractTaskGenerator {
 
     private final KafkaTemplate<String, IndexedTask> kafkaTemplate;
-
-    private final AtomicInteger index = new AtomicInteger(0);
 
     public KafkaTaskGenerator(KafkaTemplate<String, IndexedTask> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
@@ -25,7 +20,7 @@ public class KafkaTaskGenerator implements TaskGenerator {
     @Override
     @PostMapping(value = "/produceTask")
     public IndexedTask produceTask() {
-        IndexedTask indexedTask = new IndexedTask(index.getAndIncrement(), 1, -3, 4);
+        IndexedTask indexedTask = super.produceTask();
         kafkaTemplate.send(KafkaTaskProducer.TOPIC, indexedTask);
         return indexedTask;
     }
@@ -33,13 +28,8 @@ public class KafkaTaskGenerator implements TaskGenerator {
     @Override
     @PostMapping(value = "/produceTasks")
     public List<IndexedTask> producesTasks(@RequestParam int howMany) {
-        return IntStream
-                .range(0, howMany)
-                .mapToObj(i -> {
-                    IndexedTask indexedTask = new IndexedTask(index.getAndIncrement(), 1, -3, 4);
-                    kafkaTemplate.send(KafkaTaskProducer.TOPIC, indexedTask);
-                    return indexedTask;
-                })
-                .collect(Collectors.toList());
+        List<IndexedTask> indexedTasks = super.producesTasks(howMany);
+        indexedTasks.forEach(task -> kafkaTemplate.send(KafkaTaskProducer.TOPIC, task));
+        return indexedTasks;
     }
 }

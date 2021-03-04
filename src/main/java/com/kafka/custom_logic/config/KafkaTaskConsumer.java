@@ -1,7 +1,7 @@
 package com.kafka.custom_logic.config;
 
-import com.kafka.core.config.props.ConsumerProperties;
 import com.kafka.custom_logic.task.IndexedTask;
+import com.kafka.props.ConsumerProperties;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ public class KafkaTaskConsumer {
         Map<String, Object> properties = ConsumerProperties
                 .builder()
                 .serverConfig("127.0.0.1:9092") //TODO: change
-                .groupIdConfig(GROUP_ID) //TODO: change
+                .groupIdConfig(GROUP_ID)
                 .keyDeserializer(StringDeserializer.class)
                 .valueDeserializer(JsonDeserializer.class)
                 .build()

@@ -1,7 +1,7 @@
 package com.kafka.custom_logic.config;
 
-import com.kafka.core.config.props.ProducerProperties;
 import com.kafka.custom_logic.answer.IndexedAnswer;
+import com.kafka.props.ProducerProperties;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
